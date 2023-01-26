@@ -6,12 +6,25 @@ body {
 #pl {
     background: linear-gradient(to top, red, red, white, white);
     background-repeat: no-repeat;
+
+    /* animation: flag 10s ease-in-out; */
 }
+
+@keyframes flag {
+    from {
+        transform: translateY(0);
+      }
+      to { 
+        transform: translateY(-187%);
+      }
+   }
 
 #en {
     background: linear-gradient(to left, rgb(0, 255, 21), rgba(255, 0, 221, 0.541), rgba(9, 4, 248, 0.623), rgba(245, 229, 9, 0.637));
     background-repeat: no-repeat;
+
 }
+
 
 hr {
    width: 500px;
