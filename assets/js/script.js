@@ -119,86 +119,67 @@ function update() {
     let guess = "";
     document.getElementById("answer").innerText = "";
 
-    //string up the guesses into the word
+    //string p the guess word
     for (let c = 0; c < width; c++) {
-        let currTile = document.getElementById(row.toString() + '-' + c.toString());
+        let currTile = document.getElementById(row.toString() + "-" + c.toString());
         let letter = currTile.innerText;
-        guess += letter;
+        guess += letter; 
     }
 
-    guess = guess.toLowerCase(); //case sensitive
-    console.log(guess);
-
-    if (!guessList.includes(guess)) {
+    guess = guess.toLowerCase();
+    if (!wordListEn.includes(guess)) {
         document.getElementById("answer").innerText = "Not in word list";
         return;
     }
-    
-    //start processing guess
+
     let correct = 0;
-
-    let letterCount = {}; //keep track of letter frequency, ex) KENNY -> {K:1, E:1, N:2, Y: 1}
-    for (let i = 0; i < word.length; i++) {
-        let letter = word[i];
-
-        if (letterCount[letter]) {
-           letterCount[letter] += 1;
-        } 
-        else {
-           letterCount[letter] = 1;
-        }
+    let letterCount = {};
+for (let l = 0; l < word.length; l++) {
+    letter = word[l];
+    if (letterCount[letter]) {
+        letterCount[letter] += 1;
+    } else {
+        letterCount[letter] = 1;
     }
 
-    console.log(letterCount);
-
-    //first iteration, check all the correct ones first
-    for (let c = 0; c < width; c++) {
-        let currTile = document.getElementById(row.toString() + '-' + c.toString());
+}
+    //first iteration, check all th correct ones
+    for (let i = 0; i < width; i++) {
+        let currTile = document.getElementById(row.toString() + "-" + i.toString());
         let letter = currTile.innerText;
 
-        //Is it in the correct position?
-        if (word[c] == letter) {
+        //is the letter in the correct possitin
+        if (word[i] == letter) {
             currTile.classList.add("correct");
-
-            let keyTile = document.getElementById("Key" + letter);
-            keyTile.classList.remove("present");
-            keyTile.classList.add("correct");
-
             correct += 1;
-            letterCount[letter] -= 1; //deduct the letter count
-        }
+            letterCount[letter] -= 1;
+        } //is the letter in the word
 
         if (correct == width) {
             gameOver = true;
         }
     }
 
-    console.log(letterCount);
-    //go again and mark which ones are present but in wrong position
-    for (let c = 0; c < width; c++) {
-        let currTile = document.getElementById(row.toString() + '-' + c.toString());
+    //go again and mark which ones are present but in a wrong possition
+    for (let i = 0; i < width; i++) {
+        let currTile = document.getElementById(row.toString() + "-" + i.toString());
         let letter = currTile.innerText;
 
-        // skip the letter if it has been marked correct
         if (!currTile.classList.contains("correct")) {
-            //Is it in the word?         //make sure we don't double count
+            //is the letter in the word
             if (word.includes(letter) && letterCount[letter] > 0) {
                 currTile.classList.add("present");
-                
-                let keyTile = document.getElementById("Key" + letter);
-                if (!keyTile.classList.contains("correct")) {
-                    keyTile.classList.add("present");
-                }
                 letterCount[letter] -= 1;
-            } // Not in the word or (was in word but letters all used up to avoid overcount)
+            } // not in the word
             else {
                 currTile.classList.add("absent");
-                let keyTile = document.getElementById("Key" + letter);
-                keyTile.classList.add("absent")
             }
         }
     }
 
-    row += 1; //start new row
-    col = 0; //start at 0 for new row
+    if (correct == 5) {
+        document.getElementById("answer").innerText = "You won!";
+    }
+    row += 1;
+    col = 0; 
 }

@@ -47,6 +47,17 @@ hr {
     text-decoration: none;
 }
 
+#title img {
+    transform:scale(1);
+    transition: all 0.5s linear;
+}
+
+#title img:hover {
+    color: black;
+    transform:scale(1.3);
+    transition: all 0.5s linear;
+}
+
 #title span {
     font-size: medium;
     font-weight: bold;
@@ -119,6 +130,14 @@ hr {
     display: flex;
     justify-content: center;
     align-items: center;
+    transform:scale(1);
+    transition: all 0.3s linear;
+}
+
+.key-tile:hover {
+    transform:scale(1.1);
+    background-color: rgba(170, 100, 133, 0.4);
+    transition: all 0.2s linear;
 }
 
 .enter-key-tile {
@@ -134,4 +153,12 @@ hr {
     display: flex;
     justify-content: center;
     align-items: center;
+    transform:scale(1);
+    transition: all 0.3s linear;
+}
+
+.enter-key-tile:hover {
+    transform:scale(1.1);
+    background-color: rgba(106, 170, 100, 0.4);
+    transition: all 0.2s linear;
 }
